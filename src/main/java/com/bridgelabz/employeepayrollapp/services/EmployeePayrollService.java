@@ -14,14 +14,14 @@ public class EmployeePayrollService implements IEmployeePayrollService{
 	@Override
 	public List<EmployeePayrollData> getEmployeePayrollData() {
 		List<EmployeePayrollData> employeeDataList = new ArrayList<>();
-		employeeDataList.add(new EmployeePayrollData(1, new EmployeePayrollDTO("Aditya",30000)));
+		employeeDataList.add(new EmployeePayrollData(1, new EmployeePayrollDTO("Sippora",50000)));
 		return employeeDataList;
 	}
 
 	@Override
 	public EmployeePayrollData getEmployeePayrollDataById(int empId) {
 		EmployeePayrollData employeeData= null;
-		employeeData = new EmployeePayrollData(empId, new EmployeePayrollDTO("Aditya",30000));
+		employeeData = new EmployeePayrollData(empId, new EmployeePayrollDTO("Sippora",50000));
 		return employeeData;
 	}
 
