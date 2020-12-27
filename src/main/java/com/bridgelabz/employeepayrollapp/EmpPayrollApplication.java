@@ -15,6 +15,8 @@ public class EmpPayrollApplication {
 		// Logging the environment from appropriate application property
 		log.info("Employee Payroll Application Started in {} Environment",
 				context.getEnvironment().getProperty("environment"));
+		log.info("Employee Payroll DB User is {} Environment",
+				context.getEnvironment().getProperty("spring.datasource.username"));
 	}
 
 }
