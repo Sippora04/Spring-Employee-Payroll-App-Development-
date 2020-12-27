@@ -1,18 +1,22 @@
 package com.bridgelabz.employeepayrollapp.dto;
 
+import com.bridgelabz.employeepayrollapp.model.EmployeePayrollData;
+
+import lombok.Data;
+
+@Data
 public class EmployeePayrollDTO {
 
-	public String name;
-	public long salary;
+	private String name;
+	private long salary;
 
-	@Override
-	public String toString() {
-		return "EmployeePayrollDTO { name=" + name + ", salary= " + salary + "}";
+	public EmployeePayrollDTO(EmployeePayrollData employeePayroll) {
+		this.setName(employeePayroll.getName());
+		this.setSalary(employeePayroll.getSalary());
+	}
+
+	public EmployeePayrollDTO() {
 
 	}
 
-	public EmployeePayrollDTO(String name, long salary) {
-		this.name = name;
-		this.salary = salary;
-	}
 }
