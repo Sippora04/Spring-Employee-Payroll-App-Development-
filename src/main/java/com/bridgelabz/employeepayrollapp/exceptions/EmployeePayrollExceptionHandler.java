@@ -22,29 +22,30 @@ import lombok.extern.slf4j.Slf4j;
 @ControllerAdvice
 @Slf4j
 public class EmployeePayrollExceptionHandler {
-	private static final String message = "Exception while processing REST Request";
+
+	public static final String message = "Exception while processing REST request";
 
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public ResponseEntity<ResponseDTO> handleHttpMessageNotReadableException(
 			HttpMessageNotReadableException exception) {
 		log.error("Invalid Date Format", exception);
-		ResponseDTO responseDTO = new ResponseDTO(message, "Should have Date in the Format dd MMM yyyy");
-		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
+		ResponseDTO resDTO = new ResponseDTO(message, "Should have a date in the format dd MMM yyyy");
+		return new ResponseEntity<ResponseDTO>(resDTO, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ResponseDTO> handleMethodArgumentNotValidException(
 			MethodArgumentNotValidException exception) {
 		List<ObjectError> errorList = exception.getBindingResult().getAllErrors();
-		List<String> errMesg = errorList.stream().map(objErr -> objErr.getDefaultMessage())
-				.collect(Collectors.toList());
-		ResponseDTO responseDTO = new ResponseDTO(message, errMesg);
-		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
+		List<String> errMsg = errorList.stream().map(objErr -> objErr.getDefaultMessage()).collect(Collectors.toList());
+		ResponseDTO resDTO = new ResponseDTO("Exception while processing REST request", errMsg);
+		return new ResponseEntity<ResponseDTO>(resDTO, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(EmployeePayrollException.class)
-	public ResponseEntity<ResponseDTO> handleMethodArgumentNotValidException(EmployeePayrollException exception) {
-		ResponseDTO responseDTO = new ResponseDTO(message, exception.getMessage());
-		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
+	public ResponseEntity<ResponseDTO> handleEmployeePayrollException(EmployeePayrollException exception) {
+		ResponseDTO resDTO = new ResponseDTO("Exception while processing REST request", exception.getMessage());
+		return new ResponseEntity<ResponseDTO>(resDTO, HttpStatus.BAD_REQUEST);
 	}
+
 }
